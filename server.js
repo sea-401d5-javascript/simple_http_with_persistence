@@ -14,29 +14,24 @@ http.createServer((req, res) => {
     });
     req.on('end', () => {
       fileArr.push(dataString);
-      let fileStream = fs.createWriteStream(__dirname + '/notes/note' + fileArr.indexOf(dataString));
+      let fileStream = fs.createWriteStream(__dirname + '/data/note' + fileArr.indexOf(dataString));
       fileStream.write(dataString);
       console.log(fileStream);
-      console.log(fileArr);
-      // let dataStream = Readable;
-      // file.write(dataString);
-      // dataStream.write(dataString);
-      // dataStream.pipe(file);
       res.status = 200;
-      res.end('File saved successfully');
+      return res.end('File saved successfully');
     });
   }
 
   if (req.method === 'GET' && req.url === '/notes') {
-    let files = fs.readdir(__dirname + '/notes', (err, files) => {
+    let files = fs.readdir(__dirname + '/data', (err, files) => {
       if (err) {
         res.status = 404;
-        res.end('Error occurred: ', err);
+        return res.end('Error occurred: ', err);
       }
       files.forEach((file) => {
         res.write(file + '\n');
       });
-      res.end();
+      return res.end();
     });
   }
 
