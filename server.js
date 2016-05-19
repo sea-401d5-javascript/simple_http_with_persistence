@@ -2,7 +2,7 @@
 
 const http = require('http');
 const fs = require('fs');
-const fileArr = [];
+const fileArr = fs.readdirSync(__dirname + '/data');
 
 http.createServer((req, res) => {
   if (req.method === 'POST' && req.url === '/notes') {
@@ -12,8 +12,7 @@ http.createServer((req, res) => {
     });
     req.on('end', () => {
       fileArr.push(dataString);
-      // not working with .json extension for some weird reason
-      let fileName = __dirname + '/data/note' + fileArr.length + '.txt';
+      let fileName = __dirname + '/data/note' + fileArr.length + '.json';
       fs.writeFileSync(fileName, dataString);
       res.statusCode = 200;
       return res.end('File saved successfully');
