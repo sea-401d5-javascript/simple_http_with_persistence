@@ -30,7 +30,7 @@ describe('the http server', () => {
       expect(err).to.eql(null);
       expect(res).to.have.status(200);
       expect(res.text).to.eql('saved file ' + nextFile + '.json' + '\n');
-      fs.readFile(__dirname + '/../notes' + nextFile + '.json', (err, data) => {
+      fs.readFile(__dirname + '/../notes/' + nextFile + '.json', (err, data) => {
         if (err) throw err;
         var parsed = JSON.parse(data);
         expect(parsed).to.eql({ name: 'test name' });
