@@ -28,7 +28,6 @@ function startServer(directory, cb) {
   }).listen('3000',() => {
     process.stdout.write('server 3000 up\n');
   });
-
-};
+}
 
 module.exports = startServer;
