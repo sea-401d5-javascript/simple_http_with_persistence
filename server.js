@@ -6,7 +6,7 @@ const Writable = require('stream').Writable;
 const Readable = require('stream').Readable;
 
 http.createServer((req, res) => {
-  if (req.method === 'GET' && req.url === '/') {
+  if (req.method === 'POST') {
     let dataString = '';
     req.on('data', (data) => {
       dataString += data.toString();
@@ -21,7 +21,7 @@ http.createServer((req, res) => {
     })
   }
 
-  if (req.method === 'POST' && req.url === '/notes') {
+  if (req.method === 'GET' && req.url === '/notes') {
     let files = fs.readdir(__dirname + '/notes', (err, files) => {
       if (err) {
         res.status = 404;
