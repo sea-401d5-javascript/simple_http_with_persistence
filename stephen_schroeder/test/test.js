@@ -1,3 +1,5 @@
+'use strict';
+const fs = require('fs');
 const chai = require('chai');
 const chaiHTTP = require('chai-http');
 chai.use(chaiHTTP);
@@ -7,10 +9,9 @@ const request = chai.request;
 const server = require(__dirname + '/../server');
 
 describe('HTTP server', () => {
-  after(() => {
-    server.close();
-  });
-
-  it()
-
-})
+  // it('should accept a POST request to /data', (done) => {
+  //   var nextFile = fs.readdirSync(dir).length + 1;
+  //   var newNote = "{'why':'because i said so'}";
+  //   var name = '../data' + nextFile + '.json';
+  // })
+});
