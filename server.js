@@ -2,8 +2,6 @@
 
 const http = require('http');
 const fs = require('fs');
-const Writable = require('stream').Writable;
-const Readable = require('stream').Readable;
 const fileArr = [];
 
 http.createServer((req, res) => {
@@ -14,9 +12,9 @@ http.createServer((req, res) => {
     });
     req.on('end', () => {
       fileArr.push(dataString);
-      let fileStream = fs.createWriteStream(__dirname + '/data/note' + fileArr.length);
-      fileStream.write(dataString);
-      console.log(fileStream);
+      // not working with .json extension for some weird reason
+      let fileName = __dirname + '/data/note' + fileArr.length + '.txt';
+      fs.writeFileSync(fileName, dataString);
       res.status = 200;
       return res.end('File saved successfully');
     });
@@ -25,7 +23,7 @@ http.createServer((req, res) => {
   if (req.method === 'GET' && req.url === '/notes') {
     let files = fs.readdir(__dirname + '/data', (err, files) => {
       if (err) {
-        res.status = 404;
+        res.status = 400;
         return res.end('Error occurred: ', err);
       }
       files.forEach((file) => {
@@ -37,7 +35,7 @@ http.createServer((req, res) => {
 
   else {
     res.status = 404;
-    res.end('Not found');
+    return res.end('Not found');
   }
 
 }).listen(3000, () => {
