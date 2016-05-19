@@ -14,7 +14,7 @@ http.createServer((req, res) => {
     });
     req.on('end', () => {
       fileArr.push(dataString);
-      let fileStream = fs.createWriteStream(__dirname + '/data/note' + fileArr.indexOf(dataString));
+      let fileStream = fs.createWriteStream(__dirname + '/data/note' + fileArr.length);
       fileStream.write(dataString);
       console.log(fileStream);
       res.status = 200;
