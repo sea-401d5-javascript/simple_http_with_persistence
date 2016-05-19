@@ -11,9 +11,8 @@ let newFiles = [];
 require('../server.js');
 
 describe('HTTP server with persistence tests', () => {
-  before('read original list of files in data directory', (done) => {
-    oldFiles = fs.readdirSync('/Users/Stefanie/cf/401/week-2/class-03/stefanie-hansen/data');
-    done();
+  before('read original list of files in data directory', () => {
+    oldFiles = fs.readdirSync(__dirname + '/../data');
   });
   it('should respond to a GET request to /notes without errors', (done) => {
     request('localhost:3000')
@@ -27,7 +26,6 @@ describe('HTTP server with persistence tests', () => {
   it('should respond to a POST request to /notes without errors', (done) => {
     request('localhost:3000')
       .post('/notes')
-      .send({"test":"test"})
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
@@ -58,7 +56,7 @@ describe('HTTP server with persistence tests', () => {
       .post('/notes')
       .send({"test":"test"})
       .end((err, res) => {
-        newFiles = fs.readdirSync('/Users/Stefanie/cf/401/week-2/class-03/stefanie-hansen/data');
+        newFiles = fs.readdirSync(__dirname + '/../data');
         expect(oldFiles.length).to.be.below(newFiles.length);
         done();
       });
