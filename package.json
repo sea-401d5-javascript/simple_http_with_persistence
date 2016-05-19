@@ -1,30 +1,31 @@
 {
-  "name": "simple_http_with_persistence",
-  "version": "1.0.0",
-  "description": "class project cf 401",
-  "main": "server.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dstineback/simple_http_with_persistence.git"
-  },
-  "author": "dstineback@gmail.com",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/dstineback/simple_http_with_persistence/issues"
-  },
-  "homepage": "https://github.com/dstineback/simple_http_with_persistence#readme",
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^2.0.0",
-    "gulp-mocha": "^2.2.0",
-    "mocha": "^2.4.5"
-  }
+    "name": "simple_http_with_persistence",
+    "version": "1.0.0",
+    "description": "class project cf 401",
+    "main": "index.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dstineback/simple_http_with_persistence.git"
+    },
+    "author": "dstineback@gmail.com",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/dstineback/simple_http_with_persistence/issues"
+    },
+    "homepage": "https://github.com/dstineback/simple_http_with_persistence#readme",
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "chai-http": "^2.0.1",
+        "gulp": "^3.9.1",
+        "gulp-eslint": "^2.0.0",
+        "gulp-mocha": "^2.2.0",
+        "mocha": "^2.4.5"
+    }
 }
