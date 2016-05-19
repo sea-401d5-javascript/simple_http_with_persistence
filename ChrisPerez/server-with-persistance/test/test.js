@@ -1,3 +1,5 @@
+'use strict';
+
 const chai = require('chai');
 const fs = require('fs');
 const chaiHTTP = require('chai-http');
@@ -26,13 +28,31 @@ describe('HTTP tests', ()=>{
         done();
       })
   })
-  it('should collect data in new files', ()=>{
+  it('should get a list of files', (done)=>{
+  request('localhost:3000')
+    .get('/notes')
+    .end((err, res)=>{
+      expect(err).to.eql(null);
+      expect(res).to.have.status(200);
+      console.log(res.body);
+      done();
+    })
+})
+  it('should create a file', (done)=>{
+    let newFileNum = fs.readdirSync(__dirname + '/../data').length + 1;
     request('localhost:3000')
       .post('/notes')
-        .send({name: "person"})
+      .send({message:'test'})
       .end((err, res)=>{
+        expect(err).to.eql(null);
         expect(res).to.have.status(200);
-        //expect(JSON.parse(res.body.name)).to.eql('person');
+        fs.readFile(__dirname + '/../data/record00' + newFileNum + '.json', (err, data)=>{
+          if (err) throw err;
+          let contents = JSON.parse(data);
+          console.log(contents)
+          expect(contents).to.eql({message:'test'})
+          done();
+        })
       })
   })
 })
