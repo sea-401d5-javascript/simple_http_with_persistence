@@ -11,12 +11,12 @@ gulp.task('lint', () => {
 });
 
 gulp.task('test', () => {
-  return gulp.src(['test/*_*'], { read: false })
+  return gulp.src([__dirname + './test/test.js'], { read: false })
   .pipe(mocha({ reporter: 'nyan' }));
 });
 
 gulp.task('watch', () => {
-  gulp.watch('server.js', ['lint', 'test']);
+  gulp.watch(__dirname + './lib/server.js', ['lint', 'test']);
 });
 
 gulp.task('default', ['watch', 'lint', 'test'], () => {
