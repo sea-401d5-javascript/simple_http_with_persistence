@@ -6,8 +6,8 @@ const stream = require('stream');
 http.createServer((req, res) => {
   if (req.url === '/notes' && req.method === 'GET'){
       fs.readdir(__dirname + '/notes/', (err, files) => {
-      res.write(files.toString())
-      res.end('files listed');
+      res.write(files.toString() + '\n')
+      res.end('files listed \n');
     });
   } else if (req.url === '/notes' && req.method === 'POST'){
     let bufStr = '';
