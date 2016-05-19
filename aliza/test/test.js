@@ -12,7 +12,6 @@ require('../server');
 describe('HTTP tests', () => {
   before('reading files in notes directory', () => {
     fileArr = fs.readdirSync(__dirname + '/../notes');
-    console.log(fileArr);
   });
   it('should read file names on get request', (done) => {
     request('localhost:3000')
