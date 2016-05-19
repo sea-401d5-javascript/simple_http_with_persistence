@@ -5,30 +5,29 @@ const stream = require('stream');
 
 http.createServer((req, res) => {
   if (req.url === '/notes' && req.method === 'GET'){
-    let file = fs.createReadStream(__dirname + '/data/data.json');
-    file.pipe(res);
+      fs.readdir(__dirname + '/notes/', (err, files) => {
+      res.write(files.toString())
+      res.end('files listed');
+    });
   } else if (req.url === '/notes' && req.method === 'POST'){
-    let bufArr = [];
     let bufStr = '';
     req.on('data', (data) => {
-      bufArr.push(data);
       bufStr += data.toString();
     });
     req.on('end', () => {
-      let str = bufArr.toString();
-      let jsonObj = {};
-      let file = fs.createWriteStream(__dirname + '/data/data.json');
+      var nextFile = fs.readdirSync(__dirname + '/notes/').length + 1;
+      let file = fs.createWriteStream(__dirname + '/notes/' + nextFile + '.json');
       let bufferStream = new stream.PassThrough();
       let inBuf = new Buffer(bufStr);
       bufferStream.end(inBuf);
       bufferStream.pipe(file);
       res.statusCode = 200;
-      res.end('data written to file\n');
+      res.end('data written to file \n');
     });
   } else {
     res.status = 404;
     res.end('File not found\n');
   }
 }).listen(3000, () => {
-  console.log('server up at 3000');
+  console.log('server up at 3000 \n');
 });
