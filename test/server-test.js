@@ -23,12 +23,13 @@ describe('HTTP server with persistence tests', () => {
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
+        expect(res.text).to.eql('File saved successfully');
         done();
     });
   });
   it('should respond to request to any path besides /notes with a 404 status', (done) => {
     request('localhost:3000')
-      .get('/random')
+      .get('/TEST')
       .end((err, res) => {
         expect(res).to.have.status(404);
         expect(res.text).to.eql('Not found');
@@ -39,10 +40,8 @@ describe('HTTP server with persistence tests', () => {
     request('localhost:3000')
       .get('/notes')
       .end((err, res) => {
-        let file = res.text.trim();
-        if (res.text.lastIndexOf('\n') !== res.text.indexOf('\n')) {
-          file = res.text.split('\n').pop().trim();
-        }
+        let file = res.text.trim().split('\n').pop();
+        console.log('file', file)
         expect(file.endsWith('.txt')).to.eql(true);
         done();
       });
